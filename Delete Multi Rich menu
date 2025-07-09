@@ -1,0 +1,28 @@
+import requests
+
+# Channel access token ของคุณ
+channel_access_token = 'Channel Access Token'
+
+# List ของ Rich Menu ID ที่ต้องการลบ
+rich_menu_ids = [
+    'ID 1',
+    'ID 2'
+    # เพิ่ม Rich Menu ID ที่ต้องการลบที่นี่
+]
+
+# Headers สำหรับการเรียก API
+headers = {
+    'Authorization': f'Bearer {channel_access_token}'
+}
+
+# วนลูปเพื่อส่งคำขอ DELETE สำหรับแต่ละ Rich Menu ID
+for rich_menu_id in rich_menu_ids:
+    # URL สำหรับการลบ Rich Menu
+    url = f'https://api.line.me/v2/bot/richmenu/{rich_menu_id}'
+
+    # ทำการส่ง DELETE request เพื่อลบ Rich Menu
+    response = requests.delete(url, headers=headers)
+
+    # แสดงผลการตอบกลับ
+    print(f'Response for Rich Menu ID {rich_menu_id}: {response.status_code}')
+    print(response.text)
