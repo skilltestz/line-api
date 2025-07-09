@@ -1,0 +1,111 @@
+import requests
+
+# Channel access token ของคุณ
+channel_access_token = 'ใส่ Channel Access Token'
+
+# URL สำหรับสร้าง Rich Menu
+url = 'https://api.line.me/v2/bot/richmenu'
+
+# ข้อมูล JSON ของ Rich Menu
+richmenu_data = {
+    "size": {
+        "width": 1200,
+        "height": 800
+    },
+    "selected": False,
+    "name": "test 6 ปุ่ม",
+    "chatBarText": "Tap to open",
+    "areas": [
+        {
+            "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 400,
+                "height": 400
+            },
+
+            "action": {
+                "type": "uri",
+                "uri": "https://google.co.th/"
+            }
+        }, #มุมบนซ้ายกดฝั่งซ้ายเข้า Google
+        {
+            "bounds": {
+                "x": 0,
+                "y": 401,
+                "width": 400,
+                "height": 400
+            },
+
+            "action": {
+                "type": "uri",
+                "uri": "https://facebook.com/"
+            }
+        }, #มุมล่างซ้ายเข้า facebook
+        {
+            "bounds": {
+                "x": 401,
+                "y": 0,
+                "width": 400,
+                "height": 400
+            },
+
+            "action": {
+                "type": "message",
+                "text": "ขอโปรโมชั่น"
+            }
+        }, #กลางบนเข้า twitter
+        {
+            "bounds": {
+                "x": 401,
+                "y": 401,
+                "width": 400,
+                "height": 400
+            },
+
+            "action": {
+                "type": "uri",
+                "uri": "https://chatgpt.com/"
+            }
+        }, #กลางล่างเข้า Chatgpt
+        {
+            "bounds": {
+                "x": 801,
+                "y": 0,
+                "width": 400,
+                "height": 400
+            },
+            "action": {
+                "type": "richmenuswitch",
+                "richMenuAliasId": "richmenu-alias-b", #ชื่อไว้ sync ตอนสร้าง
+                "data": "richmenu-changed-to-b"
+            } #กดฝั่งขวา ไป rich menu B
+        },
+        {
+            "bounds": {
+                "x": 801,
+                "y": 401,
+                "width": 400,
+                "height": 400
+            },
+            "action": {
+                "type": "richmenuswitch",
+                "richMenuAliasId": "richmenu-alias-c",
+                "data": "richmenu-changed-to-c"
+            } #กดฝั่งขวา ไป rich menu c
+        }
+    ]
+}
+
+# Headers สำหรับการเรียก API
+headers = {
+    'Authorization': f'Bearer {channel_access_token}',
+    'Content-Type': 'application/json'
+}
+
+# ทำการส่ง POST request เพื่อสร้าง Rich Menu
+response = requests.post(url, headers=headers, json=richmenu_data)
+
+# แสดงผลการตอบกลับ
+print(response.status_code)
+print(response.json())
