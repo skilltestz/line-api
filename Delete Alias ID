@@ -1,0 +1,22 @@
+import requests
+
+# Channel access token ของคุณ
+channel_access_token = 'Channel Access Token'
+
+# Alias ID ที่ต้องการลบ
+alias_id = 'Alias_ID'
+
+# URL สำหรับการลบ Alias ID
+url = f'https://api.line.me/v2/bot/richmenu/alias/{alias_id}'
+
+# Headers สำหรับการเรียก API
+headers = {
+    'Authorization': f'Bearer {channel_access_token}'
+}
+
+# ทำการส่ง DELETE request เพื่อลบ Alias ID
+response = requests.delete(url, headers=headers)
+
+# แสดงผลการตอบกลับ
+print(response.status_code)
+print(response.json())
