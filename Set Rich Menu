@@ -1,0 +1,22 @@
+import requests
+
+# Channel access token ของคุณ
+channel_access_token = 'Channel Access Token'
+
+# Rich Menu ID ที่จะตั้งเป็นค่าเริ่มต้น
+rich_menu_id = 'ID'
+
+# URL สำหรับการตั้งค่า Rich Menu เป็นค่าเริ่มต้น
+url = f'https://api.line.me/v2/bot/user/all/richmenu/{rich_menu_id}'
+
+# Headers สำหรับการเรียก API
+headers = {
+    'Authorization': f'Bearer {channel_access_token}'
+}
+
+# ทำการส่ง POST request เพื่อตั้งค่า Rich Menu เป็นค่าเริ่มต้น
+response = requests.post(url, headers=headers)
+
+# แสดงผลการตอบกลับ
+print(response.status_code)
+print(response.text)
