@@ -1,0 +1,30 @@
+import requests
+
+# Channel access token ของคุณ
+channel_access_token = 'Channel Access Token'
+
+# Rich Menu ID ที่ได้รับหลังจากสร้าง Rich Menu
+rich_menu_id = 'Rich Menu ID ที่นี้'
+
+# URL สำหรับอัปโหลดรูปภาพไปยัง Rich Menu
+upload_url = f'https://api-data.line.me/v2/bot/richmenu/{rich_menu_id}/content'
+
+# URL ของรูปภาพที่ต้องการอัปโหลด
+image_url = 'URL'
+
+# ดาวน์โหลดรูปภาพจาก URL
+image_response = requests.get(image_url)
+image_data = image_response.content
+
+# Headers สำหรับการเรียก API
+headers = {
+    'Authorization': f'Bearer {channel_access_token}',
+    'Content-Type': 'image/jpeg'  # กำหนดเป็น image/jpeg เนื่องจากรูปภาพที่ดาวน์โหลดมาเป็น JPEG
+}
+
+# ทำการส่ง POST request เพื่ออัปโหลดรูปภาพ
+response = requests.post(upload_url, headers=headers, data=image_data)
+
+# แสดงผลการตอบกลับ
+print(response.status_code)
+print(response.json())
