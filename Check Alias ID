@@ -1,0 +1,19 @@
+import requests
+
+# Channel access token ของคุณ
+channel_access_token = 'Channel Access Token'
+
+# URL สำหรับการดึงรายการ Alias ID ทั้งหมด
+url = 'https://api.line.me/v2/bot/richmenu/alias/list'
+
+# Headers สำหรับการเรียก API
+headers = {
+    'Authorization': f'Bearer {channel_access_token}'
+}
+
+# ทำการส่ง GET request เพื่อดึงรายการ Alias ID ทั้งหมด
+response = requests.get(url, headers=headers)
+
+# แสดงผลการตอบกลับ
+print(response.status_code)
+print(response.json())
